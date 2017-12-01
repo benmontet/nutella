@@ -49,7 +49,7 @@ class PSFModel(object):
         recentered_tpf = []
         for i in range(len(tpf.shape[0])):
             interp_tpf = np.array([interp_objs[i](self.super_y + yc[i],
-                                                  self.super_x + xc[i]))
+                                                  self.super_x + xc[i])])
             interp_tpf = interp_tpf / np.sum(interp_tpf)
             recentered_tpf.append(interp_tpf)
         recentered_tpf = np.array(recentered_tpf)
