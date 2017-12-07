@@ -2,8 +2,14 @@ import numpy as np
 from scipy.ndimage.measurements import center_of_mass
 from scipy.interpolate import RectBivariateSpline
 
+
+__all__ = ['PSFModel']
+
+
 class PSFModel(object):
     """
+    Builds a PSF model given a pixel time series.
+
     Attributes
     ----------
     tpf : ndarray
@@ -36,14 +42,17 @@ class PSFModel(object):
 
     def make_template(self):
         """
+        Makes a super resolution template.
+
         Returns
         -------
-        super_tpf :
+        super_tpf : ndarray
             Template
         """
         yc, xc = self.estimate_centroids()
 
-        interp_objs = [RectBivariateSpline(x, y, tpf[i], kx=1, ky=1)
+        interp_objs = [RectBivariateSpline(self.super_x, self.super_y,
+                                           tpf[i], kx=1, ky=1)
                        for i in range(tpf.shape[0])]
 
         recentered_tpf = []
@@ -60,6 +69,23 @@ class PSFModel(object):
         return super_tpf
 
     def evaluate(self, f, dy, dx):
+        """
+        Evaluates the PSF value on the data domain.
+
+        Parameters
+        ----------
+        f : float
+            Total flux
+        dy : float
+            Center row
+        dx : float
+            Center column
+
+        Returns
+        -------
+        psf : ndarray
+            PSF evaluated on the data domain
+        """
         template = self.make_template()
         interp_obj = RectBivariateSpline(self.super_x, self.super_y, template,
                                          kx=1, ky=1)
