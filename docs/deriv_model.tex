@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, bm}
+
+\title{Derivatives of the Nutella Model}
+
+\begin{document}
+\maketitle
+
+\section{Maths}
+\textit{note on notation:} $x', y'$ refers to pixel coordinates in the model domain, whereas $x, y$ are pixel coordinates in the data domain.
+$c_{x'}$ and $c_{y'}$ are the center positions of the PSF.
+
+\begin{align}
+    \phi_n &= f_n p_n(c_{x'}, c_{y'}) \delta\\
+    \Phi_n &= \sum_{x', y'} \phi_n
+\end{align}
+
+\subsection{Likelihood}
+
+\begin{align}
+    \mathcal{L}_n = \sum_{x, y} \dfrac{\left(\Phi_n - d_n\right) ^ 2}{\sigma^2}\\
+    C \triangleq 2 \dfrac{\left(\Phi_n - d_n\right)}{\sigma^2}\\
+    \dfrac{\partial\mathcal{L}_n}{\partial f_n} = \sum_{x, y} p_n(c_{x'}, c_{y'}) \cdot C\delta  \\
+    \dfrac{\partial\mathcal{L}_n}{\partial \delta} = \sum_{x, y} p_n(c_{x'}, c_{y'}) \cdot C f_n  \\
+    \dfrac{\partial\mathcal{L}_n}{\partial c_{x'}} = \sum_{x, y} \dfrac{\partial p_n(c_{x'}, c_{y'})}{\partial c_{x'}} \cdot C f_n \delta \\
+    \dfrac{\partial\mathcal{L}_n}{\partial c_{y'}} = \sum_{x, y} \dfrac{\partial p_n(c_{x'}, c_{y'})}{\partial c_{y'}} \cdot C f_n \delta
+\end{align}
+
+
+\end{document}
