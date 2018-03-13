@@ -25,12 +25,12 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
     name='nutella',
     packages=['nutella'],
-    version=__version__,
-    description='great spreads',
+    version='0.0.0',
+    description='great (point) spreads for Kepler, K2, and TESS',
     long_description=long_description,
     url='https://github.com/benmontet/nutella',
     author='Ben Montet and GitHub contributors',
-    author_email='benmontet@gmail.com',
+    author_email='bmontet@uchicago.edu',
     license='MIT',
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -41,5 +41,5 @@ setup(
     setup_requires=['pytest-runner'],
     tests_require=['pytest', 'pytest-cov'],
     keywords='astronomy statistics probability',
-    install_requires=['numpy', 'scipy']
+    install_requires=['numpy', 'scipy', 'vaneska']
 )
